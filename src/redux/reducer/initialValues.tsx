@@ -1,3 +1,4 @@
 export const initialValues = {
-   post: ""
+   post: "",
+   allPost: []
 };

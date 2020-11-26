@@ -1,9 +1,10 @@
 import {initialValues } from './initialValues';
+import {CREATE_POST} from '../actions/actions';
 
 
 export const example = (state = initialValues, action: { type: any; payload: any; }) => {
    switch(action.type) {
-      case 'CREATE_POST':
+      case CREATE_POST:
          return {
             ...state,
             post: action.payload

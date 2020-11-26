@@ -1,9 +1,13 @@
 import React from 'react';
 import CreatePost from './CreatePost';
+import DisplayCards from './DisplayCards';
 
 const MainApp = () => {
    return (
-      <div><CreatePost /></div>
+      <div>
+         <CreatePost />
+         <DisplayCards />
+      </div>
 
    )
 }
