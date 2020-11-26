@@ -1,6 +1,7 @@
 import React from 'react';
 import {useDispatch} from 'react-redux';
 import {useForm} from 'react-hook-form';
+import {CREATE_POST} from '../redux/actions/actions';
 
 interface OnSubmitProps {
    post: string;
@@ -11,7 +12,7 @@ const CreatePost = () => {
    const dispatch = useDispatch();
 
    const onSubmit = (value: OnSubmitProps) => {
-      dispatch({type: "CREATE_POST", payload: value.post});
+      dispatch({type: CREATE_POST, payload: value.post});
    };
 
    return (
