@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import {example} from './reducer/remp';
+import {postReducer} from './reducer/postReducer';
 
 
 export const rootReducer = combineReducers({
-   example
+   postReducer
 })
