@@ -5,11 +5,16 @@ interface CommentValues {
    comment: string;
 }
 
+interface UsernameValue {
+   username: string;
+}
+
 interface DataValues {
    id: number;
    like_post: number;
    likes_count: number;
    post: string;
+   username: UsernameValue;
    comments?: CommentValues[];
 }
 
@@ -18,13 +23,13 @@ interface Props {
 }
 
 const SingleCardComponent: React.FC<Props> = ({data}) => {
-   const {like_post, likes_count, post, comments} = data;
+   const {like_post, likes_count, post, username: {username}, comments} = data;
 
    return (
       <div className="SingleCardComponent">
-         <p>name</p>
+         <p>{username}</p>
          <p>an hour</p>
-         <p>image here</p>
+         <p>{like_post}</p>
          <p>{post}</p>
          <span>{likes_count}</span>
          <span>{comments?.length}</span>

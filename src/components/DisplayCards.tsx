@@ -7,12 +7,18 @@ interface CommentValues {
    comment: string;
 }
 
+interface UsernameValue {
+   username: string;
+}
+
 interface AllPostProps {
    id: number;
    like_post: number;
    likes_count: number;
    post: string;
+   username: UsernameValue;
    comments?: CommentValues[];
+
 }
 
 interface InnerReducer {
