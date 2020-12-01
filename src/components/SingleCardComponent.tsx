@@ -1,4 +1,8 @@
 import React from 'react';
+import { FaComments } from "react-icons/fa";
+import { AiFillHeart } from "react-icons/ai";
+import { useState } from 'react';
+
 
 interface CommentValues {
    id: number;
@@ -27,12 +31,21 @@ const SingleCardComponent: React.FC<Props> = ({data}) => {
 
    return (
       <div className="SingleCardComponent">
-         <p>{username}</p>
-         <p>an hour</p>
-         <p>{like_post}</p>
+         <p className="username">{username}</p>
+         {/* <p>an hour</p>
+         <p>{like_post}</p> */}
+         <p className="date">12:30pm</p>
          <p>{post}</p>
-         <span>{likes_count}</span>
-         <span>{comments?.length}</span>
+         <div className="icons">
+            <p className="likes">
+               <span><AiFillHeart /></span>
+               <span>{likes_count}</span>
+            </p>
+            <p className="comments">
+               <span><FaComments /></span>
+               <span>{comments?.length}</span>
+            </p>
+         </div>
       </div>
    )
 };
