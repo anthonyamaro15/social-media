@@ -49,7 +49,6 @@ const CommentComponent = () => {
 
    useEffect(() => {
       const findUserPost = allPost.find(post => post.id === Number(userId.id) );
-      console.log("whta is this valu?? ", findUserPost);
       if(findUserPost) {
          setUserPost(findUserPost);
       }
