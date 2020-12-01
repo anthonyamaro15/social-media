@@ -8,6 +8,7 @@ import Navbar from './Navbar';
 import Register from './Register';
 import axios from 'axios';
 import { GET_ALL_POST } from '../redux/actions/actions';
+import CommentComponent from './CommentComponent';
 
 
 const MainApp = () => {
@@ -34,6 +35,9 @@ const MainApp = () => {
          </Route>
          <Route path="/login" exact>
             <Login />
+         </Route>
+         <Route path="/comments/:id" exact>
+            <CommentComponent />
          </Route>
       </div>
 

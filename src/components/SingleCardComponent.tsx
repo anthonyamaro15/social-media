@@ -2,6 +2,7 @@ import React from 'react';
 import { FaComments } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
 import { useState } from 'react';
+import {Link } from 'react-router-dom';
 
 
 interface CommentValues {
@@ -27,7 +28,12 @@ interface Props {
 }
 
 const SingleCardComponent: React.FC<Props> = ({data}) => {
-   const {like_post, likes_count, post, username: {username}, comments} = data;
+   const {id, like_post, likes_count, post, username: {username}, comments} = data;
+
+
+   const likePost = () => {
+      console.log("here ")
+   }
 
    return (
       <div className="SingleCardComponent">
@@ -37,13 +43,15 @@ const SingleCardComponent: React.FC<Props> = ({data}) => {
          <p className="date">12:30pm</p>
          <p>{post}</p>
          <div className="icons">
-            <p className="likes">
-               <span><AiFillHeart /></span>
-               <span>{likes_count}</span>
+            <p className="likes" onClick={likePost}>
+                  <span><AiFillHeart /></span>
+                  <span>{likes_count}</span>
             </p>
             <p className="comments">
-               <span><FaComments /></span>
-               <span>{comments?.length}</span>
+               <Link to={`/comments/${id}`}>
+                  <span><FaComments /></span>
+                  <span>{comments?.length}</span>
+               </Link>
             </p>
          </div>
       </div>
