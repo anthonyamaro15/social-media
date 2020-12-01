@@ -8,7 +8,68 @@
   .SingleCardComponent {
     border: 1px solid rgb(185, 180, 180);
     width: 400px;
+    border-radius: 4px;
     padding: 1rem;
     margin-bottom: 2rem;
+
+    .username,
+    .date {
+      margin-bottom: 0.5rem;
+    }
+
+    .date {
+      color: grey;
+      font-size: 0.9rem;
+    }
+
+    .icons {
+      display: flex;
+      width: 180px;
+      justify-content: space-between;
+      margin-top: 1rem;
+
+      .likes {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid grey;
+        width: 45%;
+        text-align: center;
+        border-radius: 4px;
+
+        span {
+          padding: 0.2rem 0 0;
+          &:first-child {
+            width: 60%;
+            border-right: 1px solid grey;
+          }
+
+          &:last-child {
+            width: 40%;
+          }
+        }
+      }
+
+      .comments {
+        display: flex;
+        justify-content: space-between;
+        border: 1px solid grey;
+        width: 45%;
+        text-align: center;
+        border-radius: 4px;
+
+        span {
+          padding: 0.2rem 0 0;
+
+          &:first-child {
+            width: 60%;
+            border-right: 1px solid grey;
+          }
+
+          &:last-child {
+            width: 40%;
+          }
+        }
+      }
+    }
   }
 }

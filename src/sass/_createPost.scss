@@ -1,0 +1,23 @@
+.CreatePost {
+  max-width: 1000px;
+  margin: 5rem auto;
+  text-align: center;
+
+  input {
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 0.2rem 0.3rem;
+    font-size: 1rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+
+  button {
+    outline: none;
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 0.2rem 1rem;
+    font-size: 1rem;
+  }
+}
