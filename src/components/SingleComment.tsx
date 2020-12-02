@@ -15,7 +15,7 @@ const SingleComment: React.FC<Props> = ({post, username}) => {
    return (
       <>
          <div className="upper-content">
-            <p>{username}</p>
+            <p className="username">{username}</p>
             <span>time here</span>
             <span>delete icon</span>
          </div>

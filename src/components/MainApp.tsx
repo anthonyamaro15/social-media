@@ -21,6 +21,7 @@ const MainApp = () => {
    async function getPostData() {
       const {data} = await axios.get(`${process.env.REACT_APP_API_SERVER_URL}/post/get_post`);
       dispatch({type: GET_ALL_POST, payload: data});
+      console.log('here ', data);
    }
    
    return (
@@ -37,7 +38,7 @@ const MainApp = () => {
             <Login />
          </Route>
          <Route path="/comments/:id" exact>
-            <CommentComponent />
+            <CommentComponent getPostData={getPostData} />
          </Route>
       </div>
 
