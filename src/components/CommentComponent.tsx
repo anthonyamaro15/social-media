@@ -6,6 +6,7 @@ import { AiFillHeart } from "react-icons/ai";
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import SingleComment from './SingleComment';
+import axios from 'axios';
 
 interface CommentValues {
    id: number;
@@ -37,9 +38,14 @@ interface ReducerProps {
 interface ParamValue {
    id: string;
 }
-const CommentComponent = () => {
+interface Props {
+   getPostData: () => void;
+}
+
+const CommentComponent: React.FC<Props> = ({getPostData}) => {
    const [userPost, setUserPost] = useState<AllPostProps>();
-   const userId = useParams<ParamValue>();
+   const [like, setLike] = useState<boolean>();
+   const postId = useParams<ParamValue>();
    const {register, handleSubmit} = useForm();
    const reducers = useSelector((state: ReducerProps) => ({
       ...state
@@ -48,11 +54,39 @@ const CommentComponent = () => {
    const {allPost} = reducers.postReducer;
 
    useEffect(() => {
-      const findUserPost = allPost.find(post => post.id === Number(userId.id) );
+      const findUserPost = allPost.find(post => post.id === Number(postId.id) );
       if(findUserPost) {
+         const likeValue = findUserPost.like_post === 1 ? true : false;
+         setLike(likeValue);
          setUserPost(findUserPost);
       }
-   },[]);
+   },[allPost]);
+
+   const toggleLikes = async () => {
+      setLike(!like);
+      let response;
+      if(!userPost) {
+         return
+      }
+      if(!userPost.like_post) {
+         const updatePost = {
+            like_post: true,
+            likes_count: userPost.likes_count + 1
+         }
+
+         response = await axios.patch(`${process.env.REACT_APP_API_SERVER_URL}/post/update_post/${4}/${userPost.id}`, updatePost);
+      } else {
+         const updatePost = {
+            like_post: false,
+            likes_count: userPost.likes_count === 0 ? 0 : userPost.likes_count - 1
+         }
+         response = await axios.patch(`${process.env.REACT_APP_API_SERVER_URL}/post/update_post/${4}/${userPost.id}`, updatePost);
+      }
+      getPostData();
+      
+   }
+
+   const toggleLikesClass = like ? "like-post": "";
    return (
       <div>
          <div className="CommentComponent">
@@ -63,13 +97,13 @@ const CommentComponent = () => {
                <p className="date">12:30pm</p>
                <p>{userPost?.post}</p>
                <div className="icons">
-                  <p className="likes">
-                        <span><AiFillHeart /></span>
+                  <p className="likes" onClick={toggleLikes}>
+                        <span className={toggleLikesClass}><AiFillHeart /></span>
                         <span>{userPost?.likes_count}</span>
                   </p>
                   <p className="comments">
                      <Link to="/comments">
-                        <span><FaComments /></span>
+                        <span ><FaComments /></span>
                         <span>{userPost?.comments?.length}</span>
                      </Link>
                   </p>
@@ -87,13 +121,13 @@ const CommentComponent = () => {
                      placeholder="Comment.." 
                      ref={register} />
                </label>
+               <button type="submit">Submit</button>
             </form>
-         </div>
-         <div className="display-comments">
-            {userPost?.comments?.map((post) => (
-               <SingleComment key={post.id} post={post} username={userPost.username.username} />
-            )) }
-
+            <div className="display-comments">
+               {userPost?.comments?.map((post) => (
+                  <SingleComment key={post.id} post={post} username={userPost.username.username} />
+               )) }
+            </div>
          </div>
       </div>
    )
