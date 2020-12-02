@@ -90,8 +90,18 @@ const CommentComponent: React.FC<Props> = ({getPostData}) => {
       
    }
 
+   const updateLikes = async () => {
+      if(!userPost) return
+      const likes_count = userPost.likes_count + 1;
+      try {
+         const { data } = await axios
+            .patch(`${process.env.REACT_APP_API_SERVER_URL}/post/update_likes/${userPost.id}`,{likes_count});
+         getPostData();
+      } catch (error) {
+         console.log(error.message);
+      }
+   }
    const onSubmit = async (value: FormValue) => {
-      console.log(value);
       await axios
          .post(`${process.env.REACT_APP_API_SERVER_URL}/comment/add_comment/${4}/${userPost?.id}`,value);
          reset();
@@ -109,7 +119,7 @@ const CommentComponent: React.FC<Props> = ({getPostData}) => {
                <p className="date">12:30pm</p>
                <p>{userPost?.post}</p>
                <div className="icons">
-                  <p className="likes" onClick={toggleLikes}>
+                  <p className="likes" onClick={updateLikes}>
                         <span className={toggleLikesClass}><AiFillHeart /></span>
                         <span>{userPost?.likes_count}</span>
                   </p>
