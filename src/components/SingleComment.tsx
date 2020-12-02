@@ -1,4 +1,5 @@
 import React from 'react';
+import { MdDelete } from "react-icons/md";
 
 interface CommentValues {
    id: number;
@@ -13,14 +14,16 @@ interface Props {
 const SingleComment: React.FC<Props> = ({post, username}) => {
    const {comment} = post;
    return (
-      <>
+      <div className="SingleComment-wrapper">
          <div className="upper-content">
-            <p className="username">{username}</p>
-            <span>time here</span>
-            <span>delete icon</span>
+            <div>
+               <p className="username">{username}</p>
+               <span>time here</span>
+            </div>
+            <span><MdDelete /></span>
          </div>
          <p>{comment}</p>
-      </>
+      </div>
    )
 }
 

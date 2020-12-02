@@ -42,11 +42,15 @@ interface Props {
    getPostData: () => void;
 }
 
+interface FormValue {
+   comment: string;
+}
+
 const CommentComponent: React.FC<Props> = ({getPostData}) => {
    const [userPost, setUserPost] = useState<AllPostProps>();
    const [like, setLike] = useState<boolean>();
    const postId = useParams<ParamValue>();
-   const {register, handleSubmit} = useForm();
+   const {register, handleSubmit, reset} = useForm();
    const reducers = useSelector((state: ReducerProps) => ({
       ...state
    }));
@@ -86,6 +90,14 @@ const CommentComponent: React.FC<Props> = ({getPostData}) => {
       
    }
 
+   const onSubmit = async (value: FormValue) => {
+      console.log(value);
+      await axios
+         .post(`${process.env.REACT_APP_API_SERVER_URL}/comment/add_comment/${4}/${userPost?.id}`,value);
+         reset();
+         getPostData();
+   }
+
    const toggleLikesClass = like ? "like-post": "";
    return (
       <div>
@@ -112,7 +124,7 @@ const CommentComponent: React.FC<Props> = ({getPostData}) => {
          </div>
          <div className="post-comment">
             <h3>post a comment</h3>
-            <form>
+            <form onSubmit={handleSubmit(onSubmit)}>
                <label htmlFor="comment">
                   <input 
                      type="text" 
