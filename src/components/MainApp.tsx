@@ -28,7 +28,7 @@ const MainApp = () => {
       <div>
          <Navbar />
          <Route path="/" exact>
-            <CreatePost />
+            <CreatePost getPostData={getPostData} />
             <DisplayCards />
          </Route>
          <Route path="/register" exact>
