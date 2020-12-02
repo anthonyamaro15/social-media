@@ -21,7 +21,6 @@ const CreatePost: React.FC<Props> = ({getPostData}) => {
       await axios.post(`${process.env.REACT_APP_API_SERVER_URL}/post/create/${4}`, value);
       reset();
       getPostData();
-
    };
 
    return (
