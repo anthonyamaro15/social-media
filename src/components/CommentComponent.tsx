@@ -40,13 +40,14 @@ interface ParamValue {
 }
 interface Props {
    getPostData: () => void;
+   updateLikes: (props: AllPostProps) => void;
 }
 
 interface FormValue {
    comment: string;
 }
 
-const CommentComponent: React.FC<Props> = ({getPostData}) => {
+const CommentComponent: React.FC<Props> = ({getPostData, updateLikes}) => {
    const [userPost, setUserPost] = useState<AllPostProps>();
    const [like, setLike] = useState<boolean>();
    const postId = useParams<ParamValue>();
@@ -90,16 +91,10 @@ const CommentComponent: React.FC<Props> = ({getPostData}) => {
       
    }
 
-   const updateLikes = async () => {
+   const updateSinglePostLike = async () => {
       if(!userPost) return
-      const likes_count = userPost.likes_count + 1;
-      try {
-         const { data } = await axios
-            .patch(`${process.env.REACT_APP_API_SERVER_URL}/post/update_likes/${userPost.id}`,{likes_count});
-         getPostData();
-      } catch (error) {
-         console.log(error.message);
-      }
+      updateLikes(userPost);
+
    }
    const onSubmit = async (value: FormValue) => {
       await axios
@@ -119,7 +114,7 @@ const CommentComponent: React.FC<Props> = ({getPostData}) => {
                <p className="date">12:30pm</p>
                <p>{userPost?.post}</p>
                <div className="icons">
-                  <p className="likes" onClick={updateLikes}>
+                  <p className="likes" onClick={updateSinglePostLike}>
                         <span className={toggleLikesClass}><AiFillHeart /></span>
                         <span>{userPost?.likes_count}</span>
                   </p>

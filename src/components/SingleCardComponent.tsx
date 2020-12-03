@@ -25,9 +25,10 @@ interface DataValues {
 
 interface Props {
    data: DataValues
+   updateLikes: () => void;
 }
 
-const SingleCardComponent: React.FC<Props> = ({data}) => {
+const SingleCardComponent: React.FC<Props> = ({data, updateLikes}) => {
    const {id, like_post, likes_count, post, username: {username}, comments} = data;
 
 
@@ -43,7 +44,7 @@ const SingleCardComponent: React.FC<Props> = ({data}) => {
          <p className="date">12:30pm</p>
          <p>{post}</p>
          <div className="icons">
-            <p className="likes" onClick={likePost}>
+            <p className="likes" onClick={updateLikes}>
                   <span><AiFillHeart /></span>
                   <span>{likes_count}</span>
             </p>

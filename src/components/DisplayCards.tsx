@@ -30,7 +30,11 @@ interface ReducerProps {
    postReducer: InnerReducer;
 }
 
-const DisplayCards = () => {
+interface Props {
+   updateLikes: (props: AllPostProps) => void;
+}
+
+const DisplayCards: React.FC<Props> = ({updateLikes}) => {
    const reducers = useSelector((state: ReducerProps) => ({
       ...state
    }));
@@ -39,7 +43,7 @@ const DisplayCards = () => {
    return (
       <div className="DisplayCards">
          {allPost.map((post) => (
-            <SingleCardComponent key={post.id} data={post} />
+            <SingleCardComponent key={post.id} data={post} updateLikes={() => updateLikes(post)} />
          ))}
         
       </div>
