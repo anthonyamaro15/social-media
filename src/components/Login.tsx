@@ -14,7 +14,8 @@ const Login = () => {
 
    const onSubmit = async (value: FormProps) => {
       const {data} = await axios.post(`${process.env.REACT_APP_API_SERVER_URL}/api/login`, value);
-      // data.token
+      localStorage.setItem("token", JSON.stringify(data.token));
+      localStorage.setItem("user_id", JSON.stringify(data.user_id));
       history.push("/");
    }
    return (
